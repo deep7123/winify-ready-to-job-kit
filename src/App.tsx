@@ -2437,7 +2437,6 @@ const FloatingFAB = () => {
 export default function App() {
   return (
     <div className="font-sans antialiased text-slate-900 selection:bg-red-200 selection:text-red-900 overflow-x-hidden min-h-screen">
-      <BackgroundAtmosphere />
       <Navbar />
       
       <main>
