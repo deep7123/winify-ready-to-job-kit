@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FileText, Linkedin, Mail, Target, Briefcase, 
   MessageSquare, Wrench, Users, ArrowRight, 
@@ -8,7 +8,6 @@ import {
   Award, TrendingUp, Layers, Send, Zap,
   BarChart3, ArrowUpRight, Compass,
   FolderKanban, Code, Palette, LineChart, Menu,
-  Download, Copy, CheckCheck, FolderArchive, Terminal, ExternalLink
 } from 'lucide-react';
 
 const WA_LINK = "https://wa.me/917990262500?text=HEY%20WINIFY%20I%20WANT%20WINIFY%20JOB%20KIT";
@@ -45,174 +44,6 @@ const floatAnim = (duration = 5, delay = 0, yOffset = 8, xOffset = 3) => ({
   }
 });
 
-const PROJECT_FILES = {
-  "package.json": JSON.stringify({
-    "name": "winify-ready-to-job-kit",
-    "private": true,
-    "version": "1.0.0",
-    "type": "module",
-    "scripts": {
-      "dev": "vite",
-      "build": "tsc -b && vite build",
-      "preview": "vite preview"
-    },
-    "dependencies": {
-      "clsx": "^2.1.1",
-      "framer-motion": "^11.18.2",
-      "lucide-react": "^0.475.0",
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1",
-      "tailwind-merge": "^2.6.0"
-    },
-    "devDependencies": {
-      "@types/node": "^22.13.4",
-      "@types/react": "^18.3.18",
-      "@types/react-dom": "^18.3.5",
-      "@vitejs/plugin-react": "^4.3.4",
-      "autoprefixer": "^10.4.20",
-      "postcss": "^8.5.2",
-      "tailwindcss": "^3.4.17",
-      "typescript": "^5.7.3",
-      "vite": "^6.1.0"
-    }
-  }, null, 2),
-
-  "vite.config.ts": `import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000,
-    open: true
-  }
-});`,
-
-  "tsconfig.json": JSON.stringify({
-    "compilerOptions": {
-      "target": "ES2020",
-      "useDefineForClassFields": true,
-      "lib": ["ES2020", "DOM", "DOM.Iterable"],
-      "module": "ESNext",
-      "skipLibCheck": true,
-      "moduleResolution": "bundler",
-      "allowImportingTsExtensions": true,
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "jsx": "react-jsx",
-      "strict": false,
-      "noUnusedLocals": false,
-      "noUnusedParameters": false,
-      "noFallthroughCasesInSwitch": true
-    },
-    "include": ["src"]
-  }, null, 2),
-
-  "tailwind.config.js": `/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
-      },
-      colors: {
-        brand: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          950: '#450a0a'
-        }
-      }
-    },
-  },
-  plugins: [],
-};`,
-
-  "postcss.config.js": `export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};`,
-
-  "index.html": `<!doctype html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Winify Ready-to-Job Kit | Shape Your Resume. Elevate Your Career.</title>
-    <meta name="description" content="Your complete job-search system, built around your profile, target role and market." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#FAF9F7] text-slate-900 font-['Plus_Jakarta_Sans',sans-serif] antialiased">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>`,
-
-  "src/index.css": `@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  background-color: #FAF9F7;
-  color: #0f172a;
-}`,
-
-  "src/main.tsx": `import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import './index.css';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);`,
-
-  "README.md": `# Winify Ready-to-Job Kit — Complete Web Application
-
-A premium digital experience built for **Winify Resume & Career Services**.
-
-## Quick Start Instructions
-
-1. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
-
-2. Run development server:
-\`\`\`bash
-npm run dev
-\`\`\`
-
-3. Build for production:
-\`\`\`bash
-npm run build
-\`\`\`
-
-All WhatsApp conversion CTAs point directly to:
-\`https://wa.me/917990262500?text=HEY%20WINIFY%20I%20WANT%20WINIFY%20JOB%20KIT\`
-`
-};
-
 const renderIcon = (IconComponent, className = "w-4 h-4") => {
   if (!IconComponent) return null;
   if (React.isValidElement(IconComponent)) {
@@ -238,10 +69,10 @@ const FloatingBadge = ({
   delay = 0 
 }) => {
   const variants = {
-    glass: "bg-white/85 backdrop-blur-xl border border-white/95 text-slate-800 shadow-[0_8px_20px_rgba(0,0,0,0.06)]",
-    redGlass: "bg-red-50/90 backdrop-blur-xl border border-red-200/90 text-red-900 shadow-[0_8px_20px_rgba(220,38,38,0.12)]",
-    darkGlass: "bg-slate-900/90 backdrop-blur-xl border border-slate-700/80 text-white shadow-[0_10px_25px_rgba(15,23,42,0.2)]",
-    mutedGlass: "bg-slate-100/90 backdrop-blur-xl border border-slate-200/90 text-slate-600 shadow-sm"
+    glass: "bg-white/85 backdrop-blur-md border border-white/95 text-slate-800 shadow-[0_8px_20px_rgba(0,0,0,0.06)]",
+    redGlass: "bg-red-50/90 backdrop-blur-md border border-red-200/90 text-red-900 shadow-[0_8px_20px_rgba(220,38,38,0.12)]",
+    darkGlass: "bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-[0_10px_25px_rgba(15,23,42,0.2)]",
+    mutedGlass: "bg-slate-100/90 backdrop-blur-md border border-slate-200/90 text-slate-600 shadow-sm"
   };
 
   return (
@@ -260,62 +91,26 @@ const FloatingBadge = ({
   );
 };
 
-const GlassCard = ({ 
-  children, 
-  className = "", 
+const GlassCard = ({
+  children,
+  className = "",
   level = "level-1",
-  hoverEffect = true, 
-  spotlight = true 
+  hoverEffect = true,
+  spotlight = true
 }) => {
-  const cardRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e) => {
-    if (!spotlight || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
-
   const levelStyles = {
-    "level-1": "bg-white/65 backdrop-blur-xl border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-white/95 hover:bg-white/75",
-    "level-2": "bg-white/85 backdrop-blur-2xl border border-white/95 shadow-[0_16px_40px_rgba(220,38,38,0.05)] hover:border-red-200 hover:shadow-[0_22px_50px_rgba(220,38,38,0.09)]",
-    "level-3": "bg-gradient-to-br from-white/95 via-white/90 to-red-50/40 backdrop-blur-3xl border-2 border-red-200/90 shadow-[0_24px_60px_rgba(185,28,28,0.08)] ring-1 ring-red-100/80"
+    "level-1": "bg-white/65 backdrop-blur-md border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-white/95 hover:bg-white/75",
+    "level-2": "bg-white/85 backdrop-blur-lg border border-white/95 shadow-[0_16px_40px_rgba(220,38,38,0.05)] hover:border-red-200 hover:shadow-[0_22px_50px_rgba(220,38,38,0.09)]",
+    "level-3": "bg-gradient-to-br from-white/95 via-white/90 to-red-50/40 backdrop-blur-lg border-2 border-red-200/90 shadow-[0_24px_60px_rgba(185,28,28,0.08)] ring-1 ring-red-100/80"
   };
 
   return (
     <motion.div
-      ref={cardRef}
       variants={fadeInUp}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={hoverEffect ? { y: -6, scale: 1.01 } : {}}
-      transition={{ type: "spring", stiffness: 340, damping: 24 }}
+      whileHover={hoverEffect ? { y: -3 } : undefined}
       className={`relative overflow-hidden rounded-3xl group ${levelStyles[level] || levelStyles["level-1"]} ${className}`}
     >
-      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent pointer-events-none z-20" />
-      
-      {spotlight && (
-        <div
-          className="pointer-events-none absolute -inset-px transition-opacity duration-300 rounded-3xl z-0"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(420px circle at ${mousePos.x}px ${mousePos.y}px, rgba(239, 68, 68, 0.09), transparent 60%)`
-          }}
-        />
-      )}
-
-      <motion.div 
-        initial={{ x: "-150%" }}
-        animate={{ x: isHovered ? "150%" : "-150%" }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg] z-10"
-      />
-
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white to-transparent pointer-events-none z-20" />
       <div className="relative z-10">{children}</div>
     </motion.div>
   );
@@ -326,7 +121,7 @@ const CTAButton = ({ children, className = "", variant = "primary" }) => {
 
   const variants = {
     primary: "bg-gradient-to-r from-red-600 via-rose-700 to-red-800 text-white shadow-[0_12px_35px_rgba(220,38,38,0.35)] hover:shadow-[0_18px_50px_rgba(220,38,38,0.55)] hover:-translate-y-0.5 active:translate-y-0",
-    glass: "bg-white/85 backdrop-blur-xl border border-white text-slate-900 hover:bg-white shadow-md shadow-slate-950/5 hover:-translate-y-0.5",
+    glass: "bg-white/85 backdrop-blur-md border border-white text-slate-900 hover:bg-white shadow-md shadow-slate-950/5 hover:-translate-y-0.5",
     outline: "bg-transparent border-2 border-red-600/60 text-red-700 hover:bg-red-50/60"
   };
 
@@ -346,204 +141,14 @@ const CTAButton = ({ children, className = "", variant = "primary" }) => {
       {variant === 'primary' && (
         <>
           <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-rose-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
-          <motion.div 
-            initial={{ x: "-120%" }}
-            animate={{ x: "220%" }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", repeatDelay: 1 }}
-            className="absolute top-0 bottom-0 w-20 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-22deg] z-0 pointer-events-none"
-          />
+
         </>
       )}
     </motion.a>
   );
 };
 
-const ProjectExportModal = ({ isOpen, onClose }) => {
-  const [activeFile, setActiveFile] = useState("package.json");
-  const [copied, setCopied] = useState(false);
-  const [isZipping, setIsZipping] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(PROJECT_FILES[activeFile] || "");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const downloadZip = async () => {
-    setIsZipping(true);
-    try {
-      if (!window.JSZip) {
-        await new Promise((resolve, reject) => {
-          const script = document.createElement("script");
-          script.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
-          script.onload = resolve;
-          script.onerror = reject;
-          document.head.appendChild(script);
-        });
-      }
-
-      const zip = new window.JSZip();
-      
-      // Add configuration and root files
-      zip.file("package.json", PROJECT_FILES["package.json"]);
-      zip.file("vite.config.ts", PROJECT_FILES["vite.config.ts"]);
-      zip.file("tsconfig.json", PROJECT_FILES["tsconfig.json"]);
-      zip.file("tailwind.config.js", PROJECT_FILES["tailwind.config.js"]);
-      zip.file("postcss.config.js", PROJECT_FILES["postcss.config.js"]);
-      zip.file("index.html", PROJECT_FILES["index.html"]);
-      zip.file("README.md", PROJECT_FILES["README.md"]);
-
-      // Add src files
-      const src = zip.folder("src");
-      src.file("main.tsx", PROJECT_FILES["src/main.tsx"]);
-      src.file("index.css", PROJECT_FILES["src/index.css"]);
-      
-      // Grab current running App.tsx/App.jsx code from document or memory
-      const currentAppCode = document.querySelector('script[type="module"]')?.textContent || 
-        document.documentElement.outerHTML;
-      src.file("App.tsx", PROJECT_FILES["src/App.tsx"] || currentAppCode);
-
-      const content = await zip.generateAsync({ type: "blob" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(content);
-      link.download = "winify-ready-to-job-kit.zip";
-      link.click();
-      URL.revokeObjectURL(link.href);
-    } catch (err) {
-      console.error("ZIP Generation failed:", err);
-    } finally {
-      setIsZipping(false);
-    }
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-xl animate-fadeIn">
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-5xl w-full max-h-[90vh] flex flex-col overflow-hidden text-left">
-        
-        {/* Modal Header */}
-        <div className="p-6 border-b border-slate-150 flex items-center justify-between bg-slate-50/80">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-red-600 text-white flex items-center justify-center shadow-md shadow-red-600/30">
-              <FolderArchive className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-black text-slate-900 text-lg sm:text-xl tracking-tight">Deployable Project Exporter</h3>
-              <p className="text-xs text-slate-500 font-medium">Ready for Vite + React + TypeScript + Tailwind CSS</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={downloadZip}
-              disabled={isZipping}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-xs transition-all shadow-md active:scale-95 cursor-pointer disabled:opacity-50"
-            >
-              <Download className="w-4 h-4" />
-              <span>{isZipping ? "PACKAGING ZIP..." : "DOWNLOAD COMPLETE PROJECT (.ZIP)"}</span>
-            </button>
-            <button
-              onClick={onClose}
-              className="w-10 h-10 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Modal Body: File tree and code viewer */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-12 overflow-hidden">
-          
-          {/* File Explorer Sidebar */}
-          <div className="md:col-span-4 p-4 border-r border-slate-200 bg-slate-100/60 overflow-y-auto space-y-1">
-            <div className="text-[10px] font-black uppercase text-slate-400 tracking-wider mb-2 px-2">Project Files</div>
-            {Object.keys(PROJECT_FILES).map((fileName) => (
-              <button
-                key={fileName}
-                onClick={() => setActiveFile(fileName)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all text-left cursor-pointer ${
-                  activeFile === fileName 
-                    ? 'bg-white text-red-700 shadow-sm border border-red-200/80' 
-                    : 'text-slate-600 hover:bg-slate-200/60'
-                }`}
-              >
-                <div className="flex items-center gap-2 truncate">
-                  <Code className="w-3.5 h-3.5 shrink-0 text-slate-400" />
-                  <span className="truncate">{fileName}</span>
-                </div>
-                {activeFile === fileName && <ChevronRight className="w-3.5 h-3.5 text-red-600 shrink-0" />}
-              </button>
-            ))}
-
-            <div className="mt-6 p-3 bg-red-50 rounded-2xl border border-red-200 text-[11px] text-red-900 font-semibold space-y-1.5">
-              <div className="font-black flex items-center gap-1 text-red-700">
-                <Terminal className="w-3.5 h-3.5" /> Quick Deploy
-              </div>
-              <p className="font-mono text-[10px] bg-white p-1.5 rounded border border-red-100 text-slate-700">
-                npm install<br/>
-                npm run dev
-              </p>
-            </div>
-          </div>
-
-          {/* Code Viewer Panel */}
-          <div className="md:col-span-8 flex flex-col bg-slate-950 text-slate-200 overflow-hidden">
-            <div className="flex items-center justify-between p-3 border-b border-slate-800 bg-slate-900/90 text-xs font-mono">
-              <span className="text-slate-400">{activeFile}</span>
-              <button
-                onClick={handleCopy}
-                className="flex items-center gap-1 px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white font-bold text-[11px] transition-colors cursor-pointer"
-              >
-                {copied ? <CheckCheck className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? "COPIED" : "COPY CODE"}</span>
-              </button>
-            </div>
-            
-            <pre className="flex-1 p-4 text-xs font-mono overflow-auto leading-relaxed text-emerald-300">
-              <code>{PROJECT_FILES[activeFile]}</code>
-            </pre>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
-const BackgroundAtmosphere = () => {
-  const { scrollY } = useScroll();
-  const yOrb1 = useTransform(scrollY, [0, 3000], [0, 240]);
-  const yOrb2 = useTransform(scrollY, [0, 3000], [0, -260]);
-  const yOrb3 = useTransform(scrollY, [0, 3000], [0, 180]);
-
-  return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden bg-[#FAF9F7] pointer-events-none">
-      <motion.div 
-        style={{ y: yOrb1 }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.18, 0.26, 0.18] }}
-        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-[12%] -left-[8%] w-[65vw] h-[65vw] max-w-[850px] max-h-[850px] bg-red-400/25 blur-[160px] rounded-full" 
-      />
-      <motion.div 
-        style={{ y: yOrb2 }}
-        animate={{ scale: [1.1, 0.95, 1.1], opacity: [0.16, 0.24, 0.16] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute top-[32%] -right-[12%] w-[60vw] h-[60vw] max-w-[850px] max-h-[850px] bg-rose-400/20 blur-[170px] rounded-full" 
-      />
-      <motion.div 
-        style={{ y: yOrb3 }}
-        animate={{ scale: [0.95, 1.12, 0.95], opacity: [0.14, 0.22, 0.14] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-[70%] left-[12%] w-[55vw] h-[55vw] max-w-[780px] max-h-[780px] bg-red-500/15 blur-[160px] rounded-full" 
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(#e11d48_0.65px,transparent_0.65px)] [background-size:36px_36px] opacity-[0.032]" />
-    </div>
-  );
-};
-
-const Navbar = ({ onOpenExport }) => {
+const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -582,17 +187,14 @@ const Navbar = ({ onOpenExport }) => {
   ];
 
   return (
-    <motion.nav 
-      initial={{ y: -70, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'py-2.5' : 'py-5'}`}
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-2.5' : 'py-5'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between rounded-2xl px-5 py-3 transition-all duration-500 ${
           scrolled 
-            ? 'bg-white/85 backdrop-blur-2xl border border-white/90 shadow-[0_12px_35px_rgba(0,0,0,0.06)]' 
-            : 'bg-white/65 backdrop-blur-xl border border-white/70 shadow-sm'
+            ? 'bg-white/85 backdrop-blur-lg border border-white/90 shadow-[0_12px_35px_rgba(0,0,0,0.06)]' 
+            : 'bg-white/65 backdrop-blur-md border border-white/70 shadow-sm'
         }`}>
           <a href="#top" className="flex items-center gap-3 group select-none">
             <motion.div 
@@ -643,15 +245,6 @@ const Navbar = ({ onOpenExport }) => {
           </div>
 
           <div className="flex items-center gap-2.5">
-            <button
-              onClick={onOpenExport}
-              title="Export complete deployable project ZIP"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-black text-xs transition-colors border border-slate-200 shadow-xs cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5 text-red-600" />
-              <span>EXPORT ZIP</span>
-            </button>
-
             <CTAButton variant="primary" className="!py-2.5 !px-5 !text-xs !shadow-md hidden sm:flex">
               TALK TO WINIFY
             </CTAButton>
@@ -673,7 +266,7 @@ const Navbar = ({ onOpenExport }) => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden mt-2 p-5 rounded-2xl bg-white/95 backdrop-blur-2xl border border-white shadow-2xl text-left"
+              className="lg:hidden mt-2 p-5 rounded-2xl bg-white/95 backdrop-blur-lg border border-white shadow-2xl text-left"
             >
               <div className="space-y-2 mb-4">
                 {navLinks.map((item, idx) => (
@@ -706,16 +299,6 @@ const Navbar = ({ onOpenExport }) => {
               </div>
 
               <div className="pt-2 border-t border-slate-200 flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenExport();
-                  }}
-                  className="w-full py-3 rounded-xl bg-slate-100 font-black text-xs text-slate-800 border border-slate-200 flex items-center justify-center gap-2"
-                >
-                  <Download className="w-4 h-4 text-red-600" /> EXPORT FULL PROJECT (.ZIP)
-                </button>
-
                 <CTAButton variant="primary" className="w-full !py-3.5 !text-xs !shadow-lg">
                   TALK TO WINIFY
                 </CTAButton>
@@ -724,52 +307,18 @@ const Navbar = ({ onOpenExport }) => {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
 const Hero = () => {
   const containerRef = useRef(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 120 };
-  const smoothMouseX = useSpring(mouseX, springConfig);
-  const smoothMouseY = useSpring(mouseY, springConfig);
-
-  const rotateX = useTransform(smoothMouseY, [-250, 250], [5, -5]);
-  const rotateY = useTransform(smoothMouseX, [-250, 250], [-5, 5]);
-
-  const resumeX = useTransform(smoothMouseX, [-250, 250], [-10, 10]);
-  const resumeY = useTransform(smoothMouseY, [-250, 250], [-8, 8]);
-
-  const profileX = useTransform(smoothMouseX, [-250, 250], [14, -14]);
-  const profileY = useTransform(smoothMouseY, [-250, 250], [12, -12]);
-
-  const portfolioX = useTransform(smoothMouseX, [-250, 250], [-6, 6]);
-  const portfolioY = useTransform(smoothMouseY, [-250, 250], [10, -10]);
-
-  const glowX = useTransform(smoothMouseX, [-250, 250], [20, -20]);
-  const glowY = useTransform(smoothMouseY, [-250, 250], [18, -18]);
-
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - (rect.left + rect.width / 2));
-    mouseY.set(e.clientY - (rect.top + rect.height / 2));
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
 
   return (
     <section 
       id="top"
       ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 overflow-hidden scroll-mt-28"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -783,7 +332,7 @@ const Hero = () => {
           >
             <motion.div 
               variants={fadeInUp}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 backdrop-blur-xl border border-red-200/90 text-red-700 text-xs font-black mb-6 shadow-sm"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-red-200/90 text-red-700 text-xs font-black mb-6 shadow-sm"
             >
               <Sparkles className="w-3.5 h-3.5 text-red-600 animate-pulse" />
               <span className="tracking-widest uppercase">WINIFY READY-TO-JOB KIT</span>
@@ -830,11 +379,9 @@ const Hero = () => {
           </motion.div>
 
           <motion.div 
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
             className="lg:col-span-6 relative h-[570px] hidden sm:block perspective-1000"
           >
             <motion.div 
-              style={{ x: glowX, y: glowY }}
               className="absolute inset-0 bg-gradient-to-tr from-red-500/15 via-rose-500/10 to-transparent blur-3xl rounded-full pointer-events-none" 
             />
 
@@ -883,11 +430,10 @@ const Hero = () => {
             </motion.div>
 
             <motion.div 
-              style={{ x: profileX, y: profileY }}
               initial={{ opacity: 0, scale: 0.94, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.8, ease: "easeOut" }}
-              className="absolute top-4 right-6 w-80 bg-white/85 backdrop-blur-2xl border border-white/90 rounded-2xl shadow-xl shadow-red-950/10 p-5 z-10 text-left"
+              className="absolute top-4 right-6 w-80 bg-white/85 backdrop-blur-lg border border-white/90 rounded-2xl shadow-xl shadow-red-950/10 p-5 z-10 text-left"
             >
               <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                 <div className="flex items-center gap-2">
@@ -917,11 +463,10 @@ const Hero = () => {
             </motion.div>
 
             <motion.div 
-              style={{ x: resumeX, y: resumeY }}
               initial={{ opacity: 0, scale: 0.94, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.45, duration: 0.85, ease: "easeOut" }}
-              className="absolute top-24 left-4 w-84 bg-white/95 backdrop-blur-3xl border border-white rounded-3xl shadow-2xl shadow-red-900/15 p-6 z-20 text-left"
+              className="absolute top-24 left-4 w-84 bg-white/95 backdrop-blur-lg border border-white rounded-3xl shadow-2xl shadow-red-900/15 p-6 z-20 text-left"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2.5">
@@ -967,11 +512,10 @@ const Hero = () => {
             </motion.div>
 
             <motion.div 
-              style={{ x: portfolioX, y: portfolioY }}
               initial={{ opacity: 0, scale: 0.94, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.65, duration: 0.9, ease: "easeOut" }}
-              className="absolute bottom-10 left-12 right-6 bg-white/95 backdrop-blur-2xl border border-white rounded-2xl shadow-xl shadow-red-950/10 p-3.5 z-30 flex items-center justify-between"
+              className="absolute bottom-10 left-12 right-6 bg-white/95 backdrop-blur-lg border border-white rounded-2xl shadow-xl shadow-red-950/10 p-3.5 z-30 flex items-center justify-between"
             >
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white shrink-0 shadow-md">
@@ -1021,7 +565,7 @@ const RevealSection = () => {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-14 p-5 sm:p-7 rounded-3xl bg-white/70 backdrop-blur-xl border border-slate-200/80 shadow-sm text-center"
+          className="max-w-4xl mx-auto mb-14 p-5 sm:p-7 rounded-3xl bg-white/70 backdrop-blur-md border border-slate-200/80 shadow-sm text-center"
         >
           <div className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3">
             THE FRAGMENTED APPLICATION REALITY
@@ -1589,7 +1133,7 @@ const WorkflowProcessSection = () => {
                     y: isActive ? -4 : 0
                   }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className={`p-5 rounded-3xl backdrop-blur-2xl border transition-all cursor-pointer flex flex-col justify-between text-left ${
+                  className={`p-5 rounded-3xl backdrop-blur-lg border transition-all cursor-pointer flex flex-col justify-between text-left ${
                     isActive 
                       ? 'bg-white/95 border-red-400 shadow-[0_16px_40px_rgba(220,38,38,0.14)] ring-2 ring-red-200/80' 
                       : 'bg-white/70 border-white/80 opacity-80 hover:opacity-100 hover:bg-white/85 shadow-sm'
@@ -2111,7 +1655,7 @@ const InteractiveShowcase = () => {
             Toggle between the live modules of the Winify Ready-To-Job Kit to experience real structural clarity.
           </p>
 
-          <div className="mt-8 inline-flex flex-wrap justify-center p-1.5 bg-white/85 backdrop-blur-xl border border-slate-200/80 rounded-2xl shadow-sm gap-1">
+          <div className="mt-8 inline-flex flex-wrap justify-center p-1.5 bg-white/85 backdrop-blur-md border border-slate-200/80 rounded-2xl shadow-sm gap-1">
             {[
               { id: 'resume', label: 'Resume Enhancement', icon: FileText },
               { id: 'linkedin', label: 'LinkedIn Makeover', icon: Linkedin },
@@ -2789,7 +2333,7 @@ const FinalCTA = () => {
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-2xl pointer-events-none" />
 
-          <div className="relative z-10 max-w-3xl mx-auto text-center backdrop-blur-2xl bg-white/10 p-8 sm:p-12 rounded-3xl border border-white/20 shadow-xl">
+          <div className="relative z-10 max-w-3xl mx-auto text-center backdrop-blur-lg bg-white/10 p-8 sm:p-12 rounded-3xl border border-white/20 shadow-xl">
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-4">
               Ready to Present Yourself Better?
             </h2>
@@ -2819,9 +2363,9 @@ const FinalCTA = () => {
   );
 };
 
-const Footer = ({ onOpenExport }) => {
+const Footer = () => {
   return (
-    <footer className="relative z-10 pt-16 pb-12 border-t border-slate-200 bg-white/60 backdrop-blur-xl">
+    <footer className="relative z-10 pt-16 pb-12 border-t border-slate-200 bg-white/60 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-12 border-b border-slate-200">
           <div className="text-center md:text-left">
@@ -2850,14 +2394,6 @@ const Footer = ({ onOpenExport }) => {
             </div>
 
             <div className="flex items-center gap-2">
-              <button
-                onClick={onOpenExport}
-                className="px-4 py-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-black border border-slate-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
-              >
-                <Download className="w-3.5 h-3.5 text-red-600" />
-                <span>EXPORT CODE</span>
-              </button>
-
               <CTAButton variant="primary" className="!py-3 !px-6 !text-xs !shadow-md">
                 TALK TO WINIFY
               </CTAButton>
@@ -2886,7 +2422,7 @@ const FloatingFAB = () => {
       rel="noopener noreferrer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-red-600 via-rose-700 to-red-800 text-white font-black text-xs uppercase tracking-wider shadow-2xl shadow-red-600/40 border border-white/30 backdrop-blur-xl group cursor-pointer select-none"
+      className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-red-600 via-rose-700 to-red-800 text-white font-black text-xs uppercase tracking-wider shadow-2xl shadow-red-600/40 border border-white/30 backdrop-blur-md group cursor-pointer select-none"
     >
       <span className="relative flex h-2.5 w-2.5">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
@@ -2899,12 +2435,10 @@ const FloatingFAB = () => {
 };
 
 export default function App() {
-  const [exportModalOpen, setExportModalOpen] = useState(false);
-
   return (
     <div className="font-sans antialiased text-slate-900 selection:bg-red-200 selection:text-red-900 overflow-x-hidden min-h-screen">
       <BackgroundAtmosphere />
-      <Navbar onOpenExport={() => setExportModalOpen(true)} />
+      <Navbar />
       
       <main>
         <Hero />
@@ -2921,13 +2455,9 @@ export default function App() {
         <FinalCTA />
       </main>
       
-      <Footer onOpenExport={() => setExportModalOpen(true)} />
+      <Footer />
       <FloatingFAB />
 
-      <ProjectExportModal 
-        isOpen={exportModalOpen} 
-        onClose={() => setExportModalOpen(false)} 
-      />
     </div>
   );
 }

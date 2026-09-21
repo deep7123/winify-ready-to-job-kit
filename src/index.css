@@ -12,3 +12,22 @@ body {
   background-color: #FAF9F7;
   color: #0f172a;
 }
+
+/* Performance safeguards: keep decorative layers from triggering expensive paint work. */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  content-visibility: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
